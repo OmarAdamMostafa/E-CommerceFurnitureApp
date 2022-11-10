@@ -12,7 +12,9 @@ import { Auth0Provider } from '@auth0/auth0-react'
 ReactDOM.render(
     
 <SidebarProvider>
-    <App />
+    <ProductsProvider>
+        <App />
+    </ProductsProvider>
 </SidebarProvider>
 
 ,
