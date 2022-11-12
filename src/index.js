@@ -13,7 +13,9 @@ ReactDOM.render(
     
 <SidebarProvider>
     <ProductsProvider>
-        <App />
+        <FilterProvider>
+            <App />
+        </FilterProvider>
     </ProductsProvider>
 </SidebarProvider>
 
