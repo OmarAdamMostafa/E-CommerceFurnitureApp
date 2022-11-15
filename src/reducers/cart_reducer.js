@@ -24,7 +24,7 @@ const cart_reducer = (state, action) => {
           return cartItem
         }
       })
-      return {...state, cart:[tempCart]}
+      return {...state, cart:tempCart}
     }
     else{
       const newItem = {
@@ -39,6 +39,56 @@ const cart_reducer = (state, action) => {
       return {...state, cart:[...state.cart, newItem]}
     }
   }
+
+  if(action.type === CLEAR_CART){
+    return {...state, cart: []}
+  }
+
+  if(action.type === REMOVE_CART_ITEM){
+    const tempCart = state.cart.filter((item) => item.id !== action.payload)
+    return {...state, cart: tempCart}
+  }
+
+  if(action.type === TOGGLE_CART_ITEM_AMOUNT){
+    const {id, value} = action.payload
+    const tempCart = state.cart.map((item)=>{
+      if(item.id === id){
+        if(value === 'inc'){
+          let newAmount = item.amount + 1
+          if(newAmount > item.max){
+            newAmount = item.max
+          }
+          return {...item, amount: newAmount}
+        }
+        if(value === 'dec'){
+          let newAmount = item.amount - 1
+          if(newAmount < 1){
+            newAmount = 1
+          }
+          return {...item, amount: newAmount}
+        }
+      }
+      else{
+        return item
+      }
+    })
+    return {...state, cart:tempCart}
+  }
+
+  if(action.type === COUNT_CART_TOTALS){
+    const {totalAmount,totalItems} = state.cart.reduce((total,cartItem)=>{
+      const {amount, price} = cartItem
+      total.totalItems += amount
+      total.totalAmount += price * amount
+
+      return total
+    }, {
+      totalAmount:0,
+      totalItems:0
+    })
+    return {...state, totalAmount:totalAmount, totalItems:totalItems}
+  }
+
   throw new Error(`No Matching "${action.type}" - action type`)
 }
 
