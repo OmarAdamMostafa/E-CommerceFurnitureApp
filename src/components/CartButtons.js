@@ -8,7 +8,7 @@ import { useUserContext } from '../context/user_context'
 
 const CartButtons = () => {
   const {closeSideBar} = useSidebarContext()
-  const {totalItems} = useCartContext()
+  const {totalItems, clearCart} = useCartContext()
   const {loginWithRedirect, myUser, logout} = useUserContext()
 
   return <Wrapper className='cart-btn-wrapper'>
@@ -21,7 +21,10 @@ const CartButtons = () => {
     </Link>
     {
     myUser ? (
-      <button type='button' className='auth-btn' onClick={()=>logout({ returnTo: window.location.origin})}>
+      <button type='button' className='auth-btn' onClick={()=>{
+        clearCart()
+        logout({ returnTo: window.location.origin})
+      }}>
         Logout <FaUserMinus/>
       </button>
     ) : (
