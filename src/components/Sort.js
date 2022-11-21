@@ -1,15 +1,17 @@
 import React from 'react'
-import { useFilterContext } from '../context/filter_context'
 import { BsFillGridFill, BsList } from 'react-icons/bs'
+import { setGridView, setListView, updateSort } from '../features/FilterFeature/filterSlice'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 const Sort = () => {
-  const {filteredProducts, gridView, sort, setGridView, setListView , updateSort} = useFilterContext()
+  const {filteredProducts, gridView, sort} = useSelector((store)=>store.filter)
+  const {dispatch} = useDispatch()
   return <Wrapper>
     <div className='btn-container'>
-      <button type='button' className={`${gridView ? 'active' : null}`} onClick={setGridView}>
+      <button type='button' className={`${gridView ? 'active' : null}`} onClick={dispatch(setGridView)}>
         <BsFillGridFill/>
       </button>
-      <button type='button' className={`${!gridView ? 'active' : null}`} onClick={setListView}>
+      <button type='button' className={`${!gridView ? 'active' : null}`} onClick={dispatch(setListView)}>
         <BsList/>
       </button>
     </div>
@@ -17,7 +19,7 @@ const Sort = () => {
     <hr/>
     <form>
       <label htmlFor="sort"> Sort by:</label>
-      <select name='sort' id='sort' className='sort-input' value={sort} onChange={updateSort}>
+      <select name='sort' id='sort' className='sort-input' value={sort} onChange={dispatch(updateSort)}>
         <option value='price-lowest'>price (lowest)</option>
         <option value='price-highest'>price (highest)</option>
         <option value='name-a'>name (a-z)</option>
