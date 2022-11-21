@@ -11,8 +11,6 @@ import {
   GET_SINGLE_PRODUCT_ERROR,
 } from '../actions'
 
-//
-
 const initialState = {
   productsLoading: false,
   productsError: false,

@@ -2,17 +2,17 @@ import React from 'react'
 import { FaShoppingCart, FaUserMinus, FaUserPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSidebarContext } from '../context/sidebar_context'
 import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
+import { useDispatch } from 'react-redux'
 
 const CartButtons = () => {
-  const {closeSideBar} = useSidebarContext()
+  const dispatch = useDispatch()
   const {totalItems, clearCart} = useCartContext()
   const {loginWithRedirect, myUser, logout} = useUserContext()
 
   return <Wrapper className='cart-btn-wrapper'>
-    <Link to='/cart' className='cart-btn' onClick={closeSideBar}>
+    <Link to='/cart' className='cart-btn' onClick={dispatch(closeSideBar())}>
       Cart 
       <span className='cart-container'>
         <FaShoppingCart/>
