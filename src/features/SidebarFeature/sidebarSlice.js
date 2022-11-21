@@ -9,17 +9,17 @@ const sidebarSlice = createSlice({
   initialState,
   reducers: {
     openSidebar: (state) =>{
-      state.isSidebarOpen = true
+      state.isSidebarOpen = true;
     },
     closeSidebar: (state) =>{
-      state.isSidebarOpen = false
-    }
-  }
+      state.isSidebarOpen = false;
+    },
+  },
 });
 
 export const {
   openSidebar,
-  closeSidebar
+  closeSidebar,
 } = sidebarSlice.actions;
 
 export default sidebarSlice.reducer;

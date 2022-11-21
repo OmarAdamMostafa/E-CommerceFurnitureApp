@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import CartButtons from './CartButtons'
 import { useUserContext } from '../context/user_context'
 import { useDispatch, useSelector} from 'react-redux'
+import { closeSidebar } from '../features/SidebarFeature/sidebarSlice'
 
 const Sidebar = () => {
   const {isSidebarOpen} = useSelector((store)=>store.sidebar);

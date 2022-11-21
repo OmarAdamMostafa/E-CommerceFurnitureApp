@@ -7,6 +7,7 @@ import { links } from '../utils/constants'
 import CartButtons from './CartButtons'
 import { useUserContext } from '../context/user_context'
 import { useDispatch } from 'react-redux'
+import { openSidebar } from '../features/SidebarFeature/sidebarSlice'
 
 const Nav = () => {
   const dispatch = useDispatch()

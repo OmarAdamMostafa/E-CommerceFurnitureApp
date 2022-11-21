@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Navbar, Sidebar, Footer } from './components'
 import {Home,About,Cart,Error,CheckOut,Products,SingleProduct,PrivateRoute,AuthWrapper} from './pages'
+import { useDispatch } from 'react-redux';
+import { fetchProducts } from './features/ProductsFeature/productsSlice';
+
+import { products_url as url } from './utils/constants'
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(()=>[
+    dispatch(fetchProducts(url))
+    // eslint-disable-next-line
+  ],[])
+
   return (
     <AuthWrapper>
       <Router>
