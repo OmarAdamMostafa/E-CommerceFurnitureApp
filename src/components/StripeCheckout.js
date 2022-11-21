@@ -8,15 +8,17 @@ import {
   useElements,
 } from '@stripe/react-stripe-js'
 import axios from 'axios'
-import { useCartContext } from '../context/cart_context'
+import { useSelector, useDispatch } from 'react-redux'
 import { useUserContext } from '../context/user_context'
+import { clearCart } from '../features/CartFeature/cartSlice'
 import { formatPrice } from '../utils/helpers'
 import { useNavigate } from 'react-router-dom';
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
 
 const CheckoutForm = () => {
-  const {cart, totalAmount, shippingFee, clearCart} = useCartContext()
+  const {cart, totalAmount, shippingFee} = useSelector((store)=>store.cart)
+  const dispatch = useDispatch()
   const {myUser} = useUserContext()
 
   const [succeeded, setSucceeded] = useState(false)
@@ -92,7 +94,7 @@ const CheckoutForm = () => {
       setProccessing(false)
       setSucceeded(true)
       setTimeout(()=>{
-        clearCart()
+        dispatch(clearCart())
         navigate("/");
       },10000)
     }

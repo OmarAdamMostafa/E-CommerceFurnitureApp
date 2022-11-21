@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 const Sort = () => {
   const {filteredProducts, gridView, sort} = useSelector((store)=>store.filter)
-  const {dispatch} = useDispatch()
+  const dispatch = useDispatch()
   return <Wrapper>
     <div className='btn-container'>
       <button type='button' className={`${gridView ? 'active' : null}`} onClick={dispatch(setGridView)}>

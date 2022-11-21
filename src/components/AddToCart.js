@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FaCheck } from 'react-icons/fa'
-import { useCartContext } from '../context/cart_context'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../features/CartFeature/cartSlice'
 import AmountButtons from './AmountButtons'
 
 const AddToCart = ({product}) => {
-  const {addToCart} = useCartContext()
+  const dispatch = useDispatch()
   const {id,stock,colors} = product
   const [amount,setAmount] = useState(1)
   const [mainColor,setMainColor] = useState(colors[0])
@@ -48,7 +49,7 @@ const AddToCart = ({product}) => {
     </div>
     <div className='btn-container'>
         <AmountButtons amount={amount} increase={increase} decrease={decrease}/>
-        <Link to='/cart' className='btn' onClick={()=>addToCart(id, mainColor, amount, product)}>Add to cart</Link>
+        <Link to='/cart' className='btn' onClick={()=>dispatch(addToCart(id, mainColor, amount, product))}>Add to cart</Link>
     </div>
   </Wrapper>
 }

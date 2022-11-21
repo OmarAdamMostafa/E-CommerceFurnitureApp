@@ -2,18 +2,40 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Navbar, Sidebar, Footer } from './components'
 import {Home,About,Cart,Error,CheckOut,Products,SingleProduct,PrivateRoute,AuthWrapper} from './pages'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from './features/ProductsFeature/productsSlice';
+import { countCartTotal } from './features/CartFeature/cartSlice';
+import { filterProducts, loadProducts, sortProducts } from './features/FilterFeature/filterSlice';
 
 import { products_url as url } from './utils/constants'
 
 function App() {
   const dispatch = useDispatch();
+  const {cart} = useSelector((store)=>store.cart)
+  const {products} = useSelector((store)=>store.products)
+  const {sort, filters} = useSelector((store)=>store.filter)
 
   useEffect(()=>[
     dispatch(fetchProducts(url))
     // eslint-disable-next-line
   ],[])
+
+  useEffect(()=>{
+    dispatch(loadProducts(products))
+    // eslint-disable-next-line
+  },[products])
+
+  useEffect(()=>{
+    dispatch(filterProducts)
+    dispatch(sortProducts)
+    // eslint-disable-next-line
+  },[products,sort,filters])
+
+  useEffect(()=>{
+    dispatch(countCartTotal)
+    localStorage.setItem('cart',JSON.stringify(cart))
+    // eslint-disable-next-line
+  },[cart])
 
   return (
     <AuthWrapper>

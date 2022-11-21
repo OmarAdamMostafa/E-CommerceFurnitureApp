@@ -2,14 +2,14 @@ import React from 'react'
 import { FaShoppingCart, FaUserMinus, FaUserPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { closeSidebar } from '../features/SidebarFeature/sidebarSlice'
+import { clearCart } from '../features/CartFeature/cartSlice'
 
 const CartButtons = () => {
   const dispatch = useDispatch()
-  const {totalItems, clearCart} = useCartContext()
+  const {totalItems} = useSelector((store)=>store.cart)
   const {loginWithRedirect, myUser, logout} = useUserContext()
 
   return <Wrapper className='cart-btn-wrapper'>
@@ -23,7 +23,7 @@ const CartButtons = () => {
     {
     myUser ? (
       <button type='button' className='auth-btn' onClick={()=>{
-        clearCart()
+        dispatch(clearCart())
         logout({ returnTo: window.location.origin})
       }}>
         Logout <FaUserMinus/>

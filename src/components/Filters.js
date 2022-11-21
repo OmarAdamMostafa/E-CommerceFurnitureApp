@@ -19,7 +19,7 @@ const Filters = () => {
       shipping,
     }
   } = useSelector((store)=>store.filter)
-  const {dispatch} = useDispatch()
+  const dispatch = useDispatch()
 
   const categories = getUniqueValues(allProducts,'category')
   const companies = getUniqueValues(allProducts,'company')
