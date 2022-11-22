@@ -49,7 +49,9 @@ const AddToCart = ({product}) => {
     </div>
     <div className='btn-container'>
         <AmountButtons amount={amount} increase={increase} decrease={decrease}/>
-        <Link to='/cart' className='btn' onClick={()=>dispatch(addToCart(id, mainColor, amount, product))}>Add to cart</Link>
+        {console.log('start')}
+        <Link to='/cart' className='btn' onClick={()=>{dispatch(addToCart({id: id, mainColor: mainColor, amount: amount, product}))}}>Add to cart</Link>
+        {console.log('end')}
     </div>
   </Wrapper>
 }

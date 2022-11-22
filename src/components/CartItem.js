@@ -10,10 +10,12 @@ const CartItem = ({id,image,name,color,price,amount}) => {
   const dispatch = useDispatch()
 
   const increase = () =>{
-    dispatch(toggleAmount(id, 'inc'))
+    const value = 'inc'
+    dispatch(toggleAmount({id: id, value: value}))
   }
   const decrease = () =>{
-    dispatch(toggleAmount(id, 'dec'))
+    const value = 'dec'
+    dispatch(toggleAmount({id: id, value: value}))
   }
 
   return <Wrapper>

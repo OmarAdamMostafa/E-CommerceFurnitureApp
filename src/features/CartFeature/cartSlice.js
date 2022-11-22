@@ -22,6 +22,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state,action) =>{
+        console.log(action.payload);
         const {id,color,amount,product} = action.payload
         const tempItem = state.cart.find((item) => item.id === id + color) // .find() get the first element matching the condition
 

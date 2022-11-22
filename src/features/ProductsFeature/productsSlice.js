@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { products_url as url } from '../../utils/constants'
 
 const initialState = {
   productsLoading: false,
@@ -13,7 +14,7 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts', 
-  async (url, thunkAPI) => {
+  async (thunkAPI) => {
     try {
       const resp = await axios(url);
       return resp.data;

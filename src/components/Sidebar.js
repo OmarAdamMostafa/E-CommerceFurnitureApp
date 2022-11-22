@@ -13,18 +13,20 @@ const Sidebar = () => {
   const {isSidebarOpen} = useSelector((store)=>store.sidebar);
   const dispatch = useDispatch()
   const {myUser} = useUserContext()
+  
 
   return <SidebarContainer>
+    {/* {console.log(isSidebarOpen)} */}
     <aside className={`${isSidebarOpen ? 'sidebar show-sidebar' : 'sidebar'}`}>
       <div className='sidebar-header'>
         <img src={logo} alt='Comfy Sloth' className='logo'/>
-        <button className='close-btn' type='button' onClick={dispatch(closeSidebar())}><FaTimes/></button>
+        <button className='close-btn' type='button' onClick={()=>dispatch(closeSidebar())}><FaTimes/></button>
       </div>
       <ul className='links'>
         {links.map((link)=>{
           const {id,text,url} = link;
           return <li key={id}>
-                  <Link to={url} onClick={dispatch(closeSidebar())}>
+                  <Link to={url} onClick={()=>dispatch(closeSidebar())}>
                     {text}
                   </Link>
                  </li>
@@ -32,7 +34,7 @@ const Sidebar = () => {
         {
           myUser && (
             <li>
-              <Link to='/checkout' onClick={dispatch(closeSidebar())}>
+              <Link to='/checkout' onClick={()=>dispatch(closeSidebar())}>
                 Checkout
               </Link>
             </li>

@@ -19,7 +19,7 @@ const Nav = () => {
         <Link to='/'>
           <img src={logo} alt='Comfy Sloth'/>
         </Link>
-        <button type='button' className='nav-toggle' onClick={dispatch(openSidebar())}>
+        <button type='button' className='nav-toggle' onClick={()=>dispatch(openSidebar())}>
           <FaBars/>
         </button>
       </div>

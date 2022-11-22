@@ -32,7 +32,6 @@ const filterSlice = createSlice({
         state.filteredProducts = [...action.payload]
         state.filters.maxPrice = max_price 
         state.filters.price = max_price
-        
     },
     filterProducts: (state) =>{
         const {allProducts} = state
@@ -101,25 +100,14 @@ const filterSlice = createSlice({
         state.gridView = false
     },
     updateSort: (state,action) =>{
-        const value = action.payload.target.value // Used to get the value of the input
+        const value = action.payload.value // Used to get the value of the input
         state.sort = value;
     },
-    updateFilters: (state,action) =>{
-        let name = action.payload.target.name;
-        let value = action.payload.target.value;
-        if(name === 'category'){ // Since the category part uses buttons which do not have values, Therefore each buttons textContent is used instead
-            value = action.payload.target.textContent
-        }
-        if(name === 'color'){ // Since the color part uses buttons which do not have values
-            value = action.payload.target.dataset.color
-        }
-        if(name === 'price'){ // This is done because after adjusting the price range, the actual price is set as a string instead of an int
-            value = Number(value)
-        }
-        if(name === 'shipping'){ // Since the shipping part uses a checkbox which does not have a value
-            value = action.payload.target.checked
-        }
-        state.filters = {...state.filters,[name]:value}
+    updateFilters: (state,action) =>{ 
+        let name = action.payload.name;
+        let value = action.payload.value;
+
+        state.filters[name] = value
     },
     clearFilters: (state) =>{
         state.filters = {

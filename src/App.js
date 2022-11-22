@@ -7,7 +7,7 @@ import { fetchProducts } from './features/ProductsFeature/productsSlice';
 import { countCartTotal } from './features/CartFeature/cartSlice';
 import { filterProducts, loadProducts, sortProducts } from './features/FilterFeature/filterSlice';
 
-import { products_url as url } from './utils/constants'
+
 
 function App() {
   const dispatch = useDispatch();
@@ -15,10 +15,10 @@ function App() {
   const {products} = useSelector((store)=>store.products)
   const {sort, filters} = useSelector((store)=>store.filter)
 
-  useEffect(()=>[
-    dispatch(fetchProducts(url))
+  useEffect(()=>{
+    dispatch(fetchProducts())
     // eslint-disable-next-line
-  ],[])
+  },[])
 
   useEffect(()=>{
     dispatch(loadProducts(products))
@@ -26,13 +26,13 @@ function App() {
   },[products])
 
   useEffect(()=>{
-    dispatch(filterProducts)
-    dispatch(sortProducts)
+    dispatch(filterProducts())
+    dispatch(sortProducts())
     // eslint-disable-next-line
   },[products,sort,filters])
 
   useEffect(()=>{
-    dispatch(countCartTotal)
+    dispatch(countCartTotal())
     localStorage.setItem('cart',JSON.stringify(cart))
     // eslint-disable-next-line
   },[cart])
