@@ -2,17 +2,18 @@ import React from 'react'
 import { FaShoppingCart, FaUserMinus, FaUserPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSidebarContext } from '../context/sidebar_context'
-import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
+import { useSelector, useDispatch } from 'react-redux'
+import { closeSidebar } from '../features/SidebarFeature/sidebarSlice'
+import { clearCart } from '../features/CartFeature/cartSlice'
 
 const CartButtons = () => {
-  const {closeSideBar} = useSidebarContext()
-  const {totalItems, clearCart} = useCartContext()
+  const dispatch = useDispatch()
+  const {totalItems} = useSelector((store)=>store.cart)
   const {loginWithRedirect, myUser, logout} = useUserContext()
 
   return <Wrapper className='cart-btn-wrapper'>
-    <Link to='/cart' className='cart-btn' onClick={closeSideBar}>
+    <Link to='/cart' className='cart-btn' onClick={()=>dispatch(closeSidebar())}>
       Cart 
       <span className='cart-container'>
         <FaShoppingCart/>
@@ -22,7 +23,7 @@ const CartButtons = () => {
     {
     myUser ? (
       <button type='button' className='auth-btn' onClick={()=>{
-        clearCart()
+        dispatch(clearCart())
         logout({ returnTo: window.location.origin})
       }}>
         Logout <FaUserMinus/>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useProductsContext } from '../context/products_context'
+import { useSelector } from 'react-redux' 
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Error from './Error'
@@ -7,7 +7,7 @@ import Loading from './Loading'
 import Product from './Product'
 
 const FeaturedProducts = () => {
-  const {productsLoading:loading,productsError:error,featuredProducts:featured} = useProductsContext()
+  const {productsLoading:loading,productsError:error,featuredProducts:featured} = useSelector((store)=>store.products)
   
   if(loading){
     return <Loading/>

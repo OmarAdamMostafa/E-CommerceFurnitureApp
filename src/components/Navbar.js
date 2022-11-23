@@ -5,11 +5,12 @@ import { FaBars } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { links } from '../utils/constants'
 import CartButtons from './CartButtons'
-import { useSidebarContext } from '../context/sidebar_context'
 import { useUserContext } from '../context/user_context'
+import { useDispatch } from 'react-redux'
+import { openSidebar } from '../features/SidebarFeature/sidebarSlice'
 
 const Nav = () => {
-  const {openSidebar} = useSidebarContext();
+  const dispatch = useDispatch()
   const {myUser} = useUserContext()
 
   return <NavContainer>
@@ -18,7 +19,7 @@ const Nav = () => {
         <Link to='/'>
           <img src={logo} alt='Comfy Sloth'/>
         </Link>
-        <button type='button' className='nav-toggle' onClick={openSidebar}>
+        <button type='button' className='nav-toggle' onClick={()=>dispatch(openSidebar())}>
           <FaBars/>
         </button>
       </div>
