@@ -5,7 +5,7 @@
 
 Open and view the Project using the `.zip` file provided or at my [GitHub Repository]
 
-The project is also hosted on [GitHub Pages]
+The project is also hosted on [Official Site]
 
 ## Table of Contents
 - [Getting Started](#getting-started)
